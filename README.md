@@ -1,8 +1,9 @@
-# AWS CodePipeline Branch Filter 
+# AWS CodePipeline Branch Filter
 
 ## Project goal
 
-![Pipeline Trigger](screenshots/pipeline-trigger.png)
+![Pipeline Trigger](screenshots/Screenshot_20260310_....png)
+
 Demonstrate how AWS CodePipeline can be configured to trigger only for a specific Git branch.
 
 This repository is used to test **branch filtering in the Source stage** of AWS CodePipeline.
@@ -11,7 +12,7 @@ This repository is used to test **branch filtering in the Source stage** of AWS 
 
 ## Architecture
 
-Developer → GitHub → CodePipeline → Build
+Developer → GitHub → AWS CodePipeline → Build
 
 The pipeline is configured to trigger **only when commits are pushed to the `main` branch**.
 
@@ -19,19 +20,30 @@ The pipeline is configured to trigger **only when commits are pushed to the `mai
 
 ## Scenario tested
 
-1. Push to `dev` branch  
-Result: Pipeline **does not start**
+### 1 Push to `dev` branch
 
-2. Push to `main` branch  
-Result: Pipeline **starts automatically**
+Result:
 
-This confirms that **branch filtering works correctly**.
+Pipeline **does NOT start**
+
+This simulates development changes that should not trigger the production pipeline.
+
+---
+
+### 2 Push to `main` branch
+
+Result:
+
+Pipeline **starts automatically**
+
+This represents production-ready code being merged to the main branch.
 
 ---
 
 ## Technologies used
 
 - AWS CodePipeline
+- AWS CodeBuild
 - GitHub repository
 - GitHub App connection
 - Branch filtering in Source stage
@@ -39,7 +51,28 @@ This confirms that **branch filtering works correctly**.
 ---
 
 ## Repository structure
-dev branch → development changes main branch → production pipeline trigger
+
+```
+main branch → production pipeline trigger
+
+dev branch → development changes
+```
+
+Typical workflow:
+
+```
+feature branch
+      ↓
+pull request
+      ↓
+merge to dev
+      ↓
+testing
+      ↓
+merge to main
+      ↓
+CodePipeline triggers build
+```
 
 ---
 
@@ -47,14 +80,47 @@ dev branch → development changes main branch → production pipeline trigger
 
 Branch filtering allows CI/CD pipelines to run only for specific branches.
 
+This helps:
+
+- avoid unnecessary pipeline executions
+- protect production environments
+- separate development and production workflows
+
 Typical real-world setup:
 
-feature branches → pull request → merge to main → pipeline triggers build and deploy
+```
+feature branches
+      ↓
+pull request
+      ↓
+merge to main
+      ↓
+pipeline triggers build and deployment
+```
 
-This prevents unnecessary pipeline executions and protects production environments.
+---
+
+## Example pipeline flow
+
+```
+Developer
+   ↓
+Push code
+   ↓
+GitHub repository
+   ↓
+AWS CodePipeline
+   ↓
+Build stage (CodeBuild)
+```
 
 ---
 
 ## Author
 
-Hands-on DevOps practice project.
+Hands-on DevOps practice project demonstrating:
+
+- AWS CodePipeline
+- GitHub integration
+- CI/CD pipeline triggers
+- Branch filtering configuration
