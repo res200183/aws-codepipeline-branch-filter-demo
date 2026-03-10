@@ -39,7 +39,6 @@ This confirms that **branch filtering works correctly**.
 
 ## Repository structure
 dev branch → development changes main branch → production pipeline trigger
-Копіювати код
 
 ---
 
