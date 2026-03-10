@@ -1,7 +1,8 @@
-# AWS CodePipeline Branch Filter Demo
+# AWS CodePipeline Branch Filter 
 
 ## Project goal
 
+![Pipeline Trigger](screenshots/pipeline-trigger.png)
 Demonstrate how AWS CodePipeline can be configured to trigger only for a specific Git branch.
 
 This repository is used to test **branch filtering in the Source stage** of AWS CodePipeline.
